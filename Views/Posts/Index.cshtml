@@ -1,0 +1,47 @@
+﻿@model List<BlogWithEf.Models.Post>
+<style>
+    p1 {
+        font-size: 500%;
+        font-family: 'Comic Sans MS';
+    }
+</style>
+<html>
+<body>
+    <p1>Posts</p1>
+
+    <!--view in charge of displaying a list of all posts by retrieving them from the model and looping through each ID in the database-->
+
+    @if (!Model.Any())
+    {
+        <p>No posts were found in the database.</p>
+    }
+    else
+    {
+        foreach (var post in Model)
+        {
+            <article class="post">
+                <h2>@post.Title</h2>
+                <p>@post.Body</p>
+                <p>Posted: @post.CreatedUtc.ToString("yyyy-MM-dd HH:mm:ss")</p>
+
+                <a asp-action="Edit"
+                   asp-route-id="@post.ID"
+                   class="btn btn-primary">
+                    Edit
+                </a>
+
+                <form asp-action="Delete"
+                      asp-route-id="@post.ID"
+                      method="post"
+                      style="display:inline">
+                    <button type="submit"
+                            class="btn btn-danger"
+                            onclick="return confirm('Are you sure you want to delete this post?');">
+                        Delete
+                    </button>
+                </form>
+            </article>
+        }
+    }
+</body>
+</html>

@@ -1,0 +1,27 @@
+﻿@model BlogWithEf.Models.Post
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Post</h1>
+
+<!--view responsible for allowing the user to edit an already existing post by using information grabbed from the database-->
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label" value="@Model.Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Body" class="form-label" value="@Model.Body"></label>
+        <textarea asp-for="Body" class="form-control"></textarea>
+        <span asp-validation-for="Body" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
